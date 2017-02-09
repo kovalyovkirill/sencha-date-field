@@ -2,7 +2,7 @@
 
 ## Warning! Don't use it for production.
 
-[Sencha Touch](https://www.sencha.com/legal/gpl/) DateField (`xtype: datefield`) plugin witch adds two properties maxDate and minDate. These properties allow us to control maximum and minimum limits of date. 
+[Sencha Touch](https://www.sencha.com/legal/gpl/) DateField (`xtype: datefield`) plugin witch adds two properties maxDate and minDate. These properties allow us to control maximum and minimum limits of date. Supports **Sencha Touch 2.4+**.
 
 ## How to use?
 1. Create folder `ux` in your root folder
