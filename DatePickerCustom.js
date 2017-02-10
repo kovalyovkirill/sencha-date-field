@@ -134,7 +134,8 @@ Ext.define('YourAppName.ux.DatePickerCustom', {
             });
         }
 
-        if (yearsFrom == yearCurrent && yearsTo == yearCurrent && monthCurrent == monthTo) {
+        if (yearsFrom == yearCurrent && yearsTo == yearCurrent 
+            && monthCurrent == monthTo && monthCurrent == monthFrom) {
             i = daysFrom;
             ln = daysTo;
         } else if (yearsFrom == yearCurrent && monthCurrent == monthFrom) {
