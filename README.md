@@ -5,7 +5,7 @@
 [Sencha Touch](https://www.sencha.com/legal/gpl/) DateField (`xtype: datefield`) plugin witch adds two properties maxDate and minDate. These properties allow us to control maximum and minimum limits of date. Supports **Sencha Touch 2.4+**.
 
 ## How to use?
-1. Create folder `ux` in your root folder
+1. Create folder `ux` in your `app` folder
 2. Copy `DatePickerCustom.js` and `DatePickerFieldCustom.js` to this folder
 3. Replace app name
 3. Add these two files in requires at `app.js:`
