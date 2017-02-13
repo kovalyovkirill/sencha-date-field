@@ -2,7 +2,10 @@ Ext.define('YourAppName.ux.DatePickerFieldCustom', {
     override: 'Ext.field.DatePicker',
 
     constructor: function (config) {
-        this.callParent(arguments);
+        this.callParent([config]);
+
+        this.maxDate = this.config.maxDate || null;
+        this.maxDate = this.config.maxDate || null;
     },
 
     getPicker: function () {
@@ -10,7 +13,7 @@ Ext.define('YourAppName.ux.DatePickerFieldCustom', {
             value = this.getValue();
 
         if (picker && !picker.isPicker) {
-            picker = Ext.factory({maxDate: this.maxDate, minDate: this.minDate}, Ext.picker.Date);
+            picker = Ext.factory({maxDate: this.config.maxDate || null, minDate: this.config.minDate || null}, Ext.picker.Date);
             if (value != null) {
                 picker.setValue(value);
             }
@@ -29,25 +32,25 @@ Ext.define('YourAppName.ux.DatePickerFieldCustom', {
 
     setMinDate: function (minDate) {
         if (Ext.isDate(minDate)) {
-            this.minDate = minDate;
+            this.config.minDate = minDate;
 
             var me = this,
                 picker = me._picker;
 
             if (picker && picker.isPicker) {
-                picker.minDate = minDate;
+                picker.config.minDate = minDate;
             }
         }
     },
     setMaxDate: function (maxDate) {
         if (Ext.isDate(maxDate)) {
-            this.maxDate = maxDate;
+            this.config.maxDate = maxDate;
 
             var me = this,
                 picker = me._picker;
 
             if (picker && picker.isPicker) {
-                picker.maxDate = maxDate;
+                picker.config.maxDate = maxDate;
             }
         }
     }

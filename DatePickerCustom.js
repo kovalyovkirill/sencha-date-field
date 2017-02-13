@@ -2,11 +2,11 @@ Ext.define('YourAppName.ux.DatePickerCustom', {
 
     override: 'Ext.picker.Date',
 
-    constructor: function () {
-        this.callParent(arguments);
-
+    constructor: function (config) {
+        this.callParent([config]);
+        
         this.maxDate = this.maxDate || null;
-        this.minDate = this.minDate || null;
+        this.maxDate = this.maxDate || null;
     },
 
     getSlot: function (slotName) {
@@ -33,8 +33,8 @@ Ext.define('YourAppName.ux.DatePickerCustom', {
     createSlots: function () {
         var me = this,
             slotOrder = ['day', 'month', 'year'],
-            maxDate = me.getProperty('maxDate'),
-            minDate = me.getProperty('minDate'),
+            maxDate = me.config.maxDate,
+            minDate = me.config.minDate,
             yearsFrom = minDate ? minDate.getFullYear() : me.getYearFrom(),
             yearsTo = maxDate ? maxDate.getFullYear() : me.getYearTo(),
             monthTo = maxDate ? maxDate.getMonth() : 11,
@@ -86,8 +86,8 @@ Ext.define('YourAppName.ux.DatePickerCustom', {
 
     onSlotPick: function () {
         var value = this.getValue(true),
-            maxDate = this.getProperty('maxDate'),
-            minDate = this.getProperty('minDate'),
+            maxDate = this.config.maxDate,
+            minDate = this.config.minDate,
             yearsTo = maxDate ? maxDate.getFullYear() : this.getYearTo(),
             yearsFrom = minDate ? minDate.getFullYear() : this.getYearFrom(),
             monthFrom = minDate ? minDate.getMonth() : 0,
@@ -99,6 +99,9 @@ Ext.define('YourAppName.ux.DatePickerCustom', {
             years = [],
             yearCurrent =  value.getFullYear(), monthCurrent = value.getMonth(),
             i, ln;
+
+        console.log("maxDate", maxDate);
+        console.log("minDate", minDate);
 
         if (!value || !Ext.isDate(value)) {
             return;
@@ -133,8 +136,8 @@ Ext.define('YourAppName.ux.DatePickerCustom', {
                 value: i + 1
             });
         }
-
-        if (yearsFrom == yearCurrent && yearsTo == yearCurrent 
+        
+        if (yearsFrom == yearCurrent && yearsTo == yearCurrent
             && monthCurrent == monthTo && monthCurrent == monthFrom) {
             i = daysFrom;
             ln = daysTo;
@@ -148,14 +151,14 @@ Ext.define('YourAppName.ux.DatePickerCustom', {
             i = 1;
             ln = this.getDaysInMonth(monthCurrent + 1, yearCurrent);
         }
-
+        
         for (i; i <= ln; i++) {
             days.push({
                 text: i,
                 value: i
             });
         }
-
+        
         while (yearsFrom) {
             years.push({
                 text: yearsFrom,
@@ -189,7 +192,7 @@ Ext.define('YourAppName.ux.DatePickerCustom', {
             var searchItem = slot._name == 'day'
                 ? value.getDate()
                 : slot._name == 'year'? value.getFullYear() : value.getMonth() + 1;
-
+                
             index = store.find(valueField, searchItem);
 
             if (index == -1) {
@@ -234,13 +237,5 @@ Ext.define('YourAppName.ux.DatePickerCustom', {
         this.fireEvent('cancel', this);
         this.hide();
         Ext.util.InputBlocker.unblockInputs();
-    },
-
-    getProperty: function (property) {
-        if (this.hasOwnProperty(property)) {
-            return this[property];
-        }
-
-        return null;
     }
 });
